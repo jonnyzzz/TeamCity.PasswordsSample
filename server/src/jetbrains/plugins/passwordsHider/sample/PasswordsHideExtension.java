@@ -5,20 +5,27 @@ import jetbrains.buildServer.serverSide.BuildStartContextProcessor;
 import jetbrains.buildServer.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.TreeSet;
 
 import static jetbrains.buildServer.parameters.PasswordParametersFilterCore.*;
 
 /**
- * Created 18.03.13 21:42
+ * This extension triggers replacement of passwords in
+ * - properties files that are send back from agent
+ * - in agent logs
  *
  * @author Eugene Petrenko (eugene.petrenko@jetbrains.com)
  */
 public class PasswordsHideExtension implements BuildStartContextProcessor {
+  private final Passwords myPasswords;
+
+  public PasswordsHideExtension(@NotNull Passwords passwords) {
+    myPasswords = passwords;
+  }
+
   public void updateParameters(@NotNull final BuildStartContext context) {
-    final Collection<String> passwords = computeParametersToHide(context);
+    final Collection<String> passwords = myPasswords.getPasswordsToReplace(context.getBuild()).keySet();
     if (passwords.isEmpty()) return;
 
     String currentValue = context.getSharedParameters().get(VALUES_LIST_CONFIG_PARAMETER_NAME);
@@ -27,12 +34,5 @@ public class PasswordsHideExtension implements BuildStartContextProcessor {
     }
 
     context.addSharedParameter(VALUES_LIST_CONFIG_PARAMETER_NAME, packParameters(new TreeSet<String>(passwords)));
-  }
-
-  @NotNull
-  private Collection<String> computeParametersToHide(@NotNull BuildStartContext context) {
-
-    ///TODO: Add here code to list properties that you're going to hide
-    return Arrays.asList("some.property");
   }
 }
