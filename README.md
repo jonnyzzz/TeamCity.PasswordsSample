@@ -1,4 +1,11 @@
-This is a IDEA project template to create a server-side only plugin for TeamCity
+This project was crerated from TeamCity plugin template.
+See https://github.com/jonnyzzz/TeamCity.PluginTemplate
+
+In this example I show how to filter hidden property values in TeamCity. 
+Of course it's always better to simply define password-typed parameter with TeamCity UI.
+
+
+This is a IDEA project of server-side only plugin for TeamCity
 For background information checkout any open-sourced plugins or see http://confluence.jetbrains.net/display/TCD65/Developing+TeamCity+Plugins
 
 In this sample you will find
@@ -10,32 +17,6 @@ In this sample you will find
 - Uses `$TeamCityDistribution$` IDEA path variable as path to TeamCity home (unpacked .tar.gz or .exe distribution)
 - Bunch of libraries for most recent needed TeamCity APIs
 - Module with TestNG tests that uses TeamCity Tests API
-
-
-What's next? 
-=============
- - Fork this repository
- - Define `$TeamCityDistribution$` IDEA path variable with path to TeamCity home (unpacked `.tar.gz` or installed `.exe` distribution).
- - Add tomcat application server named `Tomcat 7` into IDEA settings from TeamCity distribution path
- - Change project name in IDEA
- - Update `teamcity-server-plugin.xml` to put plugin name, plugin display name and description
- - Rename `server/src/META-INF/build-server-plugin-PLUGIN_NAME.xml` to put your plugin name here and update `server/server.iml`
- - Update plugin .jar file name in `plugin` artifact
- - Update plugin .zip file name in `plugin-zip` artifact
- - Have fun!
-
-
-Steps to fork template to a given repository
-===========================================
- - call git init or create new repo and local copy
- - git remote add template `git://github.com/jonnyzzz/TeamCity.PluginTemplate.git`
- - git fetch template
- - git merge template/serverOnly
- - git remote rm template
-
-Those steps makes you repo contain default template indise. 
-It's most easiest way to start.
-
 
 License
 =======
